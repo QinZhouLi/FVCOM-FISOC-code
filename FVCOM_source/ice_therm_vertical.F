@@ -881,7 +881,7 @@
 
          Tsf(i,j)  = Tsfcn(i,j,ni)
 ! Qin, forced it not to lower than T_air
-         IF(Tsf(i,j) .le.T_air(i)) Tsf(i,j) = T_air(i)   
+!         IF(Tsf(i,j) .le.T_air(i)) Tsf(i,j) = T_air(i)   
          hin(i,j) = vicen(i,j,ni) / aicen(i,j,ni)
          hlyr(i,j) = hin(i,j) / real(nilyr,kind=dbl_kind)
          hsn(i,j) = vsnon(i,j,ni) / aicen(i,j,ni)
@@ -1345,11 +1345,11 @@
             enddo               ! ij
          endif
 ! force it not lower than T_air
-     do ij = 1, icells
-         i = indxi(ij)
-         j = indxj(ij)
-        IF(Tsf(i,j) .le. T_air(i)) Tsf(i,j) = T_air(i)
-     enddo
+!     do ij = 1, icells
+!         i = indxi(ij)
+!         j = indxj(ij)
+!        IF(Tsf(i,j) .le. T_air(i)) Tsf(i,j) = T_air(i)
+!     enddo
 
       !-----------------------------------------------------------------
       ! Update radiative and turbulent fluxes and their derivatives

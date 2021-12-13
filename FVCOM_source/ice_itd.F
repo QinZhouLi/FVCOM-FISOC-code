@@ -38,7 +38,7 @@
 !
 ! !USES:
 !    
-      USE ALL_VARS, ONLY: DTICE, T_AIR
+      USE ALL_VARS, ONLY: DTICE !, T_AIR
       use ice_kinds_mod
       use ice_model_size
       use ice_constants
@@ -1166,7 +1166,7 @@
                hicen(i,j,ni) = c0i
                Tsfcn(i,j,ni) = Tf(i,j)
             endif
-        IF(Tsfcn(i,j,ni) .le. T_air(i)) Tsfcn(i,j,ni) = T_air(i)
+!        IF(Tsfcn(i,j,ni) .le. T_air(i)) Tsfcn(i,j,ni) = T_air(i)
          enddo                  ! i
          enddo                  ! j
       enddo                     ! n
