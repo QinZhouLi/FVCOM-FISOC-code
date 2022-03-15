@@ -198,7 +198,7 @@ mod_par.o : mod_par.F mod_main.o mod_time.o mod_main.o mod_utils.o mod_types.o m
 mod_par_special.o : mod_par_special.F mod_main.o mod_time.o mod_main.o mod_utils.o mod_types.o mod_prec.o 
 mod_ncll.o : mod_ncll.F mod_main.o mod_interp.o mod_utils.o mod_time.o mod_prec.o 
 mod_nctools.o : mod_nctools.F mod_main.o mod_par_special.o mod_main.o mod_ncll.o mod_prec.o 
-mod_wd.o : mod_wd.F mod_par_special.o mod_main.o mod_isf.o mod_prec.o mod_prec.o 
+mod_wd.o : mod_wd.F mod_par_special.o mod_main.o mod_prec.o mod_prec.o 
 mod_sng.o : mod_sng.F mod_utils.o mod_prec.o 
 mod_heatflux.o : mod_heatflux.F mod_main.o mod_prec.o mod_utils.o mod_main.o mod_prec.o 
 mod_solar.o : mod_solar.F mod_main.o mod_prec.o mod_utils.o mod_main.o mod_prec.o 
@@ -209,7 +209,7 @@ mod_force.o : mod_force.F swmod1.o mod_fabm_data.o mod_solar.o mod_heatflux_gl.o
 mod_obcs.o : mod_obcs.F mod_spherical.o mod_main.o mod_par_special.o mod_fabm_data.o mod_main.o mod_main.o mod_force.o mod_time.o mod_main.o mod_utils.o mod_prec.o mod_prec.o 
 mod_petsc.o : mod_petsc.F mod_main.o mod_par_special.o mod_prec.o 
 mod_tvd.o : mod_tvd.F mod_main.o mod_main.o mod_prec.o mod_prec.o 
-mod_isf.o : mod_isf.F sinter.o mod_par_special.o mod_par.o mod_prec.o mod_main.o mod_prec.o 
+mod_isf.o : mod_isf.F sinter.o mod_par_special.o mod_par.o mod_prec.o mod_main.o mod_prec.o mod_wd.o 
 mod_semi_implicit.o : mod_semi_implicit.F mod_dam.o mod_wd.o mod_spherical.o mod_par_special.o mod_petsc.o mod_main.o mod_obcs.o mod_main.o mod_northpole.o mod_main.o mod_utils.o mod_main.o mod_prec.o mod_prec.o 
 mod_non_hydro.o : mod_non_hydro.F mod_semi_implicit.o mod_petsc.o mod_obcs.o mod_par_special.o mod_main.o mod_main.o mod_utils.o mod_main.o mod_wd.o mod_prec.o mod_prec.o 
 mod_set_time.o : mod_set_time.F mod_main_wave.o mod_time.o mod_input.o mod_nctools.o mod_main.o mod_prec.o 
