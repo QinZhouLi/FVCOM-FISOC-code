@@ -132,7 +132,7 @@ dashL= $(empty) -L
 #                           UNCOMMENT TO SELECT SPHERICAL COORDINATES
 #--------------------------------------------------------------------------
 
-#            FLAG_2 ?= -DSPHERICAL
+            FLAG_2 ?= -DSPHERICAL
 
 #--------------------------------------------------------------------------
 #        FLOODYING/DRYING   INCLUDE WET/DRY TREATMENT OF DOMAIN
@@ -142,7 +142,7 @@ dashL= $(empty) -L
 #                           UNCOMMENT TO INCLUDE FLOODYING/DRYING
 #--------------------------------------------------------------------------
 
-             FLAG_3 ?= -DWET_DRY
+#             FLAG_3 ?= -DWET_DRY
 
 #--------------------------------------------------------------------------
 #        MULTI_PROCESSOR    INCLUDES PARALLELIZATION WITH MPI
@@ -474,7 +474,7 @@ dashL= $(empty) -L
 #            TVD
 #--------------------------------------------------------------------------
 #
-#            FLAG_61 ?= -DTVD
+            FLAG_61 ?= -DTVD
 
 #-------------------------------------------------------------------------
 #        DEVELOPMENT FLAGS
@@ -563,7 +563,7 @@ dashL= $(empty) -L
    $(FLAG_31) $(FLAG_32) $(FLAG_33) $(FLAG_34) \
    $(FLAG_35) $(FLAG_36) $(FLAG_37) $(FLAG_38) \
    $(FLAG_39) $(FLAG_40) $(FLAG_41) $(FLAG_42) \
-   $(FLAG_43) $(FLAG_LAM)\
+   $(FLAG_43) $(FLAG_61) $(FLAG_LAM)\
    $(FLAG_101) $(FLAG_102) $(FLAG_103) $(FLAG_104) $(FLAG_105)\
    $(FLAG_211) $(FLAG_212) $(FLAG_213) $(FLAG_251) $(FLAG_261)\
    $(CPP_MISC)
