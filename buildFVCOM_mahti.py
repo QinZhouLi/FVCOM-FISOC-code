@@ -26,13 +26,21 @@ makefile_name = "makefile.api"
 makedep_name = "makedepends.api"
 
 # environment variables set here will be used over vars set with ?= in the makefile
-os.environ["IOLIBS"] = "-L/appl/spack/v014/install-tree/gcc-9.3.0/netcdf-fortran-4.5.2-n7l5qr/lib -lnetcdff -lnetcdf"
-os.environ["IOINCS"] = "-I/appl/spack/v014/install-tree/gcc-9.3.0/netcdf-fortran-4.5.2-n7l5qr/include"
+#os.environ["IOLIBS"] = "-L/appl/spack/v014/install-tree/gcc-9.3.0/netcdf-fortran-4.5.2-n7l5qr/lib -lnetcdff -lnetcdf"
+#os.environ["IOINCS"] = "-I/appl/spack/v014/install-tree/gcc-9.3.0/netcdf-fortran-4.5.2-n7l5qr/include"
+
+#os.environ["IOLIBS"] = "-L/appl/spack/v017/install-tree/gcc-11.2.0/netcdf-c-4.8.1-k66cgq/lib"
+
+os.environ["IOLIBS"] = "-L/appl/spack/v017/install-tree/gcc-11.2.0/netcdf-fortran-4.5.3-y5m33p/lib -lnetcdff -lnetcdf"
+os.environ["IOINCS"] = "-I/appl/spack/v017/install-tree/gcc-11.2.0/netcdf-fortran-4.5.3-y5m33p/include"
 
 os.environ["INSTALLDIR"] = prereq_install_dir
 os.environ["TOPDIR"] = source_dir
 
-os.environ["INCLUDEPATH"] = "/appl/spack/v014/install-tree/gcc-9.3.0/openmpi-4.0.3-ddb3ro/lib"
+#os.environ["INCLUDEPATH"] = "/appl/spack/v014/install-tree/gcc-9.3.0/openmpi-4.0.3-ddb3ro/lib"
+#os.environ["INCLUDEPATH"] = "/appl/spack/v017/install-tree/gcc-8.5.0/gcc-11.2.0-zshp2k/lib"
+os.environ["INCLUDEPATH"] = "/appl/spack/v017/install-tree/gcc-11.2.0/openmpi-4.1.2-h6c3ze/lib"
+
 os.environ["COMPILER"] = "-DGFORTRAN"
            
 if clean:
@@ -70,7 +78,7 @@ if BuildFVCOM:
     os.chdir(source_dir)
 
     if clean:
-        print "cleaning"
+        print ("cleaning")
         ret = subprocess.call(["make", "clean"])
         if (ret != 0):
             raise NameError("ERROR: Failed to clean FVCOM\n")
@@ -80,7 +88,7 @@ if BuildFVCOM:
         if (ret != 0):
             raise NameError("ERROR: Failed to build FVCOM\n")
 
-        print "copy to ",install_dir
+        print ("copy to ",install_dir)
 
         try:
             copyfile("fvcom_driver", install_dir+"/fvcom_driver")

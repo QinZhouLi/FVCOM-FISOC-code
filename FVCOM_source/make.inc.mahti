@@ -545,7 +545,8 @@ dashL= $(empty) -L
 #  END USER DEFINITION SECTION
 #==========================================================================
          CPPFLAGS ?= $(DEF_FLAGS) $(COMPILER) -fPIC
-         FFLAGS ?= $(DEBFLGS) $(OPT) -fPIC -ffree-line-length-512
+#         FFLAGS ?= $(DEBFLGS) $(OPT) -fPIC -ffree-line-length-512
+         FFLAGS ?= $(DEBFLGS) -g -fPIC -ffree-line-length-512
          MDEPFLAGS ?= --cpp --fext=f90 --file=-
          RANLIB ?= ranlib
          AR = ar rc
