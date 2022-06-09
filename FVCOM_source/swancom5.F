@@ -117,11 +117,12 @@
    
   IMPLICIT NONE                                                     
 !
-  INTEGER :: IC,IS,ID,I,INDX
+  INTEGER :: IC,IS,ID,I,INDX,ONE
   REAL    :: NN(1:MSC), ND(1:MSC)                                    
   REAL    :: DEP2(MT),KWAVEL,CGOL
   REAL    :: DEPLOC,SPCSIGL
 
+  ONE = 1
   DEPLOC = (DEP2(NV(I,1))+DEP2(NV(I,2))+DEP2(NV(I,3)))/3.0
   IF(DEPLOC <= DEPMIN)THEN
 !   *** depth is negative ***
@@ -129,8 +130,9 @@
     CGOL   = 0.                                            
   ELSE
 !   *** call KSCIP1 to compute KWAVE and CGO ***
-    SPCSIGL = SPCSIG(IS)
-    CALL KSCIP1(1,SPCSIGL,DEPLOC,KWAVEL,CGOL,NN,ND)                                 
+!    SPCSIGL = SPCSIG(IS)
+    CALL KSCIP1(ONE,SPCSIG(IS),DEPLOC,KWAVEL,CGOL,NN,ND)                                 
+!    CALL KSCIP1(ONE,SPCSIGL,DEPLOC,KWAVEL,CGOL,NN,ND)                                 
   END IF
 
   RETURN
