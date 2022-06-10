@@ -2,7 +2,9 @@
 module purge
 
 module load cmake
-module load gcc/11.2.0 openmpi/4.1.2 openblas/0.3.18-omp
+#module load gcc/9.4.0 
+module load gcc/11.2.0
+module load openmpi/4.1.2 openblas/0.3.18-omp
 module load netcdf-c/4.8.1
 module load netcdf-fortran/4.5.3
 #module load netlib-scalapack/2.1.0  

@@ -142,7 +142,7 @@ dashL= $(empty) -L
 #                           UNCOMMENT TO INCLUDE FLOODYING/DRYING
 #--------------------------------------------------------------------------
 
-#             FLAG_3 ?= -DWET_DRY
+             FLAG_3 ?= -DWET_DRY
 
 #--------------------------------------------------------------------------
 #        MULTI_PROCESSOR    INCLUDES PARALLELIZATION WITH MPI
@@ -545,8 +545,9 @@ dashL= $(empty) -L
 #  END USER DEFINITION SECTION
 #==========================================================================
          CPPFLAGS ?= $(DEF_FLAGS) $(COMPILER) -fPIC
-#         FFLAGS ?= $(DEBFLGS) $(OPT) -fPIC -ffree-line-length-512
-         FFLAGS ?= $(DEBFLGS) -g -fPIC -ffree-line-length-512
+         FFLAGS ?= $(DEBFLGS) $(OPT) -fPIC -ffree-line-length-512
+#         FFLAGS ?= $(DEBFLGS) -g -fPIC -std=legacy -ffree-line-length-512
+#         FFLAGS ?= $(DEBFLGS) -g -fPIC -ffree-line-length-512
          MDEPFLAGS ?= --cpp --fext=f90 --file=-
          RANLIB ?= ranlib
          AR = ar rc

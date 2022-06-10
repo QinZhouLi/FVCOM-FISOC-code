@@ -30,16 +30,19 @@ makedep_name = "makedepends.api"
 #os.environ["IOINCS"] = "-I/appl/spack/v014/install-tree/gcc-9.3.0/netcdf-fortran-4.5.2-n7l5qr/include"
 
 #os.environ["IOLIBS"] = "-L/appl/spack/v017/install-tree/gcc-11.2.0/netcdf-c-4.8.1-k66cgq/lib"
-
 os.environ["IOLIBS"] = "-L/appl/spack/v017/install-tree/gcc-11.2.0/netcdf-fortran-4.5.3-y5m33p/lib -lnetcdff -lnetcdf"
-os.environ["IOINCS"] = "-I/appl/spack/v017/install-tree/gcc-11.2.0/netcdf-fortran-4.5.3-y5m33p/include"
+os.environ["IOINCS"] = "/appl/spack/v017/install-tree/gcc-11.2.0/netcdf-fortran-4.5.3-y5m33p/include"
+
+#os.environ["IOLIBS"] = "-L/appl/spack/v017/install-tree/gcc-9.4.0/netcdf-c-4.8.1-ewvkdv/lib"
+#os.environ["IOLIBS"] = "-L/appl/spack/v017/install-tree/gcc-9.4.0/netcdf-fortran-4.5.3-yxu75d/lib -lnetcdff -lnetcdf"
+#os.environ["IOINCS"] = "/appl/spack/v017/install-tree/gcc-9.4.0/netcdf-fortran-4.5.3-yxu75d/include"
 
 os.environ["INSTALLDIR"] = prereq_install_dir
 os.environ["TOPDIR"] = source_dir
 
 #os.environ["INCLUDEPATH"] = "/appl/spack/v014/install-tree/gcc-9.3.0/openmpi-4.0.3-ddb3ro/lib"
 #os.environ["INCLUDEPATH"] = "/appl/spack/v017/install-tree/gcc-8.5.0/gcc-11.2.0-zshp2k/lib"
-os.environ["INCLUDEPATH"] = "/appl/spack/v017/install-tree/gcc-11.2.0/openmpi-4.1.2-h6c3ze/lib"
+#os.environ["INCLUDEPATH"] = "/appl/spack/v017/install-tree/gcc-11.2.0/openmpi-4.1.2-h6c3ze/lib"
 
 os.environ["COMPILER"] = "-DGFORTRAN"
            
@@ -48,8 +51,6 @@ if clean:
 else:
     make_args = ""
 
-
-print("\nBuilding FVCOM pre-requisites\n")
 
 try:
     os.chdir(source_dir)
@@ -62,7 +63,9 @@ except:
     raise NameError("ERROR: Failed to replace makefiles\n")
 
 if BuildPreReq:
+    print("\nBuilding FVCOM pre-requisites\n")
     if clean:
+        print ("cleaning")
         ret = subprocess.call(["make","clean"])
     else:
         ret = subprocess.call(["make"])
@@ -82,7 +85,6 @@ if BuildFVCOM:
         ret = subprocess.call(["make", "clean"])
         if (ret != 0):
             raise NameError("ERROR: Failed to clean FVCOM\n")
-#            ret = subprocess.call(["make"])
     else:
         ret = subprocess.call(["make"])
         if (ret != 0):
