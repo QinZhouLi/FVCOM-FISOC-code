@@ -444,7 +444,9 @@ SUBROUTINE INTERNAL_STEP
          ZISF=ZISF-M_W*DTI
 # endif        !  FISOC_DRAFT
          CALL   ISF_JUDGE
+# if defined (MOVING_GROUNDINGLINE)
          CALL   WET_JUDGE 
+# endif 
          D   =  H + EL-ZISF
          DT  =  H + ET-ZISF
          WHERE (D<=MIN_DEPTH)  D  =  MIN_DEPTH
