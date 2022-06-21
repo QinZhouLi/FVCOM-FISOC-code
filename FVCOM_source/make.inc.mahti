@@ -142,7 +142,7 @@ dashL= $(empty) -L
 #                           UNCOMMENT TO INCLUDE FLOODYING/DRYING
 #--------------------------------------------------------------------------
 
-             FLAG_3 ?= -DWET_DRY
+#             FLAG_3 ?= -DWET_DRY
 
 #--------------------------------------------------------------------------
 #        MULTI_PROCESSOR    INCLUDES PARALLELIZATION WITH MPI
@@ -459,7 +459,7 @@ dashL= $(empty) -L
 #        SPECIAL PARTITION
 #        This flag can make sure the identical repeat run for same amount of CPUs 
 #--------------------------------------------------------------------------
-#             FLAG_42 ?= -DPARTITION_SPECIAL
+             FLAG_42 ?= -DPARTITION_SPECIAL
 
 #--------------------------------------------------------------------------
 #--------------------------------------------------------------------------
@@ -569,6 +569,7 @@ dashL= $(empty) -L
    $(FLAG_101) $(FLAG_102) $(FLAG_103) $(FLAG_104) $(FLAG_105)\
    $(FLAG_211) $(FLAG_212) $(FLAG_213) $(FLAG_251) $(FLAG_261)\
    $(CPP_MISC)
+#   -DMOVING_GROUNDINGLINE \ 
 
 #--------------------------------------------------------------------------
 #  Libraries           
