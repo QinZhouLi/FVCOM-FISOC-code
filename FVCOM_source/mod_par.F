@@ -26,7 +26,6 @@
 ! $Revision$
 !/===========================================================================/
 
-# if !defined (PARTITION_SPECIAL)
 MODULE MOD_PAR  
    USE MOD_TYPES
    USE MOD_UTILS
@@ -2060,9 +2059,18 @@ MODULE MOD_PAR
 !===================================================================================|
 !    LOOP OVER PROCS UNTIL A MESSAGE IS RECEIVED AND UNPACK                         |
 !===================================================================================|
+# if defined (PARTITION_SPECIAL)
+
+   TRCV = 0
+   DO LPROC=1,NPROCS
+     IF(CM(LPROC)%NRCV > 0)THEN
+       TRCV  = TRCV + 1
+       CALL MPI_WAIT(IREQR(TRCV),STAT,IERR)
+# else
    DO NMSG = 1,TRCV 
      CALL MPI_WAITANY(TRCV,IREQR,INDX,STAT,IERR)
      LPROC = STAT(MPI_SOURCE) +1 
+# endif
      LP    = CM(LPROC)%RCPT*NVARS*KT 
      LBUF  = CM(LPROC)%NRCV
      N2 = LP
@@ -2078,6 +2086,9 @@ MODULE MOD_PAR
          C(CM(LPROC)%RCVP(:),J) = RBUF(N1:N2) + C(CM(LPROC)%RCVP(:),J) 
        END IF
      END DO
+# if defined (PARTITION_SPECIAL)
+    END IF
+# endif
    END DO
 
 !===================================================================================|
@@ -6612,4 +6623,3 @@ MODULE MOD_PAR
 !==============================================================================|
 
 END MODULE MOD_PAR  
-# endif
