@@ -100,7 +100,7 @@ MODULE MOD_ICENUDGE
 
   DO I = 1,NT
 # if defined (ICESHELF)
-    IF (ISISFC(I)==1) AICEU(I) = 0.0_SP
+    IF (ABS(ISISFC(I)==1) AICEU(I) = 0.0_SP
 # endif 
      IF(AICEU(I)>=1.0E-5_SP)  THEN	 
        vrel = rhow*Cw*sqrt((U(I,1) - UICE(I))**2 + (V(I,1) - VICE(I))**2)  ! m/s
@@ -169,7 +169,7 @@ MODULE MOD_ICENUDGE
     SPRO = SPCP*rhow  
     DO I = 1,M
 # if defined (ICESHELF)
-      IF (ISISFN(I)==1) AICE(I) = 0.0_SP
+      IF (ABS(ISISFN(I))==1) AICE(I) = 0.0_SP
 # endif
      IF(AICE(I)>=1.0E-5_SP)  THEN
 				 
@@ -260,7 +260,7 @@ MODULE MOD_ICENUDGE
         frzmlt = rhow*cp_ocn*(Tf-T1(I,1))*Du/DTI  !  >0 freezing
 
 #  if defined (ICESHELF)
-        IF(ISISFN(I)==1)  frzmlt = 0.0_SP
+        IF(ABS(ISISFN(I)I==1)  frzmlt = 0.0_SP
 #  endif
  
         IF (frzmlt >0.0_SP) THEN  

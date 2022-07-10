@@ -459,7 +459,7 @@ SUBROUTINE INTERNAL_STEP
 
    ! set QPREC and QEVAP to zero in the ice shelf cavity
     IF (PRECIPITATION_ON) THEN
-       WHERE (ISISFN ==1)  
+       WHERE (ABS(ISISFN) ==1)  
          QPREC = 0.0_SP
          QEVAP = 0.0_SP
        END WHERE
@@ -780,7 +780,7 @@ SUBROUTINE INTERNAL_STEP
      ! not sure if we need ramp
     CALL BOTTOM_ROUGHNESS_ICESHELF
      DO I=1,NT
-       IF (ISISFC(I)==1) THEN
+       IF (ABS(ISISFC(I))==1) THEN
        WUSURF(I)=-WUISF(I)
        WVSURF(I)=-WVISF(I)
        ENDIF
