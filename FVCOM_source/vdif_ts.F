@@ -161,7 +161,7 @@ SUBROUTINE VDIF_TS(NCON1,F)
 # if defined (ICESHELF)
      DO I=1,M 
 ! Set the radiation and net heat flux to zero beneath the ice shelf
-      IF(ISISFN(I)==1) THEN
+      IF(ABS(ISISFN(I))==1) THEN
         SWRADF(I)=0.0_SP
         WFSURF(I)=0.0_SP
         RAD(I,:) =0.0_SP  

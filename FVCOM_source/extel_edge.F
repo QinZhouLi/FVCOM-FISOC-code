@@ -147,7 +147,7 @@
 #  endif
 
 # if defined (ICESHELF)
-  WHERE(ISISFN==1)
+  WHERE(ABS(ISISFN)==1)
      QPREC2 = 0.0_SP
      QEVAP2 = 0.0_SP
   END WHERE

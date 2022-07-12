@@ -109,7 +109,7 @@ SUBROUTINE EXTERNAL_STEP
      ! not sure what is the reasonable value for  ramp
      CALL BOTTOM_ROUGHNESS_ICESHELF
     DO I=1,NT
-    IF (ISISFC(I)==1)  THEN
+    IF (ABS(ISISFC(I))==1)  THEN
        WUSURF2(I)=WUISF(I)
        WVSURF2(I)=WVISF(I)
    ENDIF

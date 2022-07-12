@@ -98,7 +98,7 @@ MODULE MOD_ISF
    INTEGER :: I
    REAL(SP) :: DTMP
    ALLOCATE(ISISFN(0:MT)); ISISFN = ZERO !
-  ALLOCATE(ISISFC(0:NT)); ISISFC = ZERO !
+   ALLOCATE(ISISFC(0:NT)); ISISFC = ZERO !
 
 
    IF (DBG_SET(DBG_SBR)) WRITE(IPT,*) "START: SET_ISF_INI"
@@ -107,10 +107,14 @@ MODULE MOD_ISF
 
  !--Determine If Node Points Are Iceshelf Based on ZISF Threshold---------------!
 !
-   ISISFN(:) = 0.0_SP
-   ISISFC(:) =0.0_SP
+   ISISFN(:) = 0
+   ISISFC(:) = 0
    
-   WHERE(ZISF>0) ISISFN=1
+   WHERE(ZISF>0.0_SP) ISISFN=1
+
+# if defined (FAKEICEDRAFT)
+   WHERE(ZISF<1.01_SP) ISISFN = -1
+# endif
  
 
 !
@@ -118,7 +122,10 @@ MODULE MOD_ISF
 !
    DO I = 1, N
      DTMP =  MIN(ZISF(NV(I,1)),ZISF(NV(I,2)),ZISF(NV(I,3)))
-     IF( DTMP > 0 )    ISISFC(I) = 1
+     IF(DTMP > 0.0_SP )    ISISFC(I) = 1
+# if defined (FAKEICEDRAFT)
+     IF (DTMP<1.01_SP)    ISISFC(I)  = -1  
+# endif
    END DO
    
   ENDIF ! coldstart
@@ -156,17 +163,26 @@ MODULE MOD_ISF
     !--Determine If Node Points Are Iceshelf Based on ZISF
     !Threshold---------------!
 !
-   ISISFN(:) = 0.0_SP
-   ISISFC(:) =0.0_SP
+   ISISFN(:) = 0
+   ISISFC(:) = 0
 
-   WHERE(ZISF>0.0000_SP) ISISFN=1
+   WHERE(ZISF>0.0_SP) ISISFN=1
+
+# if defined (FAKEICEDRAFT)
+   WHERE(ZISF<1.01_SP) ISISFN = -1
+# endif
+
 !
 !--Determine if Cells are Iceshelf  Based on ZISF
 !!Threshold---------------------!
 !
    DO I = 1, N
      DTMP =  MIN(ZISF(NV(I,1)),ZISF(NV(I,2)),ZISF(NV(I,3)))
-     IF( DTMP >0.0000_SP)    ISISFC(I) = 1
+     IF( DTMP >0.0_SP)    ISISFC(I) = 1     
+# if defined (FAKEICEDRAFT)
+     IF (DTMP<1.01_SP)    ISISFC(I)  = -1
+# endif
+
    END DO
 
 #    if defined (MULTIPROCESSOR)
@@ -271,7 +287,7 @@ MODULE MOD_ISF
 
   DO I = 1,M
 
-    IF(ISISFN(I)==1) THEN
+    IF(ABS(ISISFN(I))==1) THEN
 !! calculate the freezing temperature and melting rate
 
    COEF_b(I)=C_w*GAMA_T*(LAMDA2+LAMDA3*P_b(I)-T_w(I))-L_isf*GAMA_S
