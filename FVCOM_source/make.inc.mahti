@@ -568,7 +568,9 @@ dashL= $(empty) -L
    $(FLAG_43) $(FLAG_61) $(FLAG_LAM)\
    $(FLAG_101) $(FLAG_102) $(FLAG_103) $(FLAG_104) $(FLAG_105)\
    $(FLAG_211) $(FLAG_212) $(FLAG_213) $(FLAG_251) $(FLAG_261)\
+   -DFAKEICEDRAFT \
    $(CPP_MISC)
+
 #   -DMOVING_GROUNDINGLINE \ 
 
 #--------------------------------------------------------------------------
