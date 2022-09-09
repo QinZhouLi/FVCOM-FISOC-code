@@ -13,7 +13,10 @@ BuildFVCOM = True
 #BuildFVCOM = False
 
 prereq_install_dir =  "/projappl/project_2002875/installs/FVCOM_external/"
-install_dir =  "/projappl/project_2002875/installs/FVCOM_Fimbul/"
+#install_dir =  "/projappl/project_2002875/installs/FVCOM_Fimbul/"
+install_dir =  "/projappl/project_2002875/installs/FVCOM_MM/"
+#make_inc_name = "make.inc.mahti"
+make_inc_name = "make.inc.mahti.MM"
 
 prereq_dir =  "/projappl/project_2002875/source/fvcom4_fisoc/FVCOM_source/libs/"
 source_dir =  "/projappl/project_2002875/source/fvcom4_fisoc/FVCOM_source/"
@@ -21,7 +24,6 @@ source_dir =  "/projappl/project_2002875/source/fvcom4_fisoc/FVCOM_source/"
 #prereq_makefile_name = "makefile.puhti"
 #make_inc_name = "make.inc.puhti"
 prereq_makefile_name = "makefile.mahti"
-make_inc_name = "make.inc.mahti"
 makefile_name = "makefile.api"
 makedep_name = "makedepends.api"
 
