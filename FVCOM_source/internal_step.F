@@ -411,9 +411,9 @@ SUBROUTINE INTERNAL_STEP
 # if defined (ICESHELF)
     IF(ICESHELF_MODEL)  THEN
     IF (ICESHELF_DRAFT_VARYING) THEN
-        CALL   UPDATE_ICESHELF_DRAFT(IntTime,ZISF)
-        CALL    ISF_JUDGE
-        CALL    WET_JUDGE
+         CALL   UPDATE_ICESHELF_DRAFT(IntTime,ZISF)
+         CALL    ISF_JUDGE
+         IF(WETTING_DRYING_ON)  CALL WET_JUDGE
          D    =  H + EL-ZISF
          DT   =  H + ET-ZISF
          WHERE (D<=MIN_DEPTH)  D  =  MIN_DEPTH
@@ -443,10 +443,8 @@ SUBROUTINE INTERNAL_STEP
 # else          
          ZISF=ZISF-M_W*DTI
 # endif        !  FISOC_DRAFT
-         CALL   ISF_JUDGE
-# if defined (MOVING_GROUNDINGLINE)
-         CALL   WET_JUDGE 
-# endif 
+         CALL   ISF_JUDGE 
+         IF(WETTING_DRYING_ON) CALL WET_JUDGE
          D   =  H + EL-ZISF
          DT  =  H + ET-ZISF
          WHERE (D<=MIN_DEPTH)  D  =  MIN_DEPTH
