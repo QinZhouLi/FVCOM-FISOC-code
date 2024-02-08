@@ -24,6 +24,10 @@ MODULE MOD_STATION_TIMESERIES
   LOGICAL OUT_ENERGY_SPECTRUM
   LOGICAL OUT_WAVE_PARTITION
 # endif  
+# if defined (ICESHELF)
+  LOGICAL OUT_ICESHELF_DRAFT
+  LOGICAL OUT_ICESHELF_MELTRATE
+# endif  
   CHARACTER(LEN=80) OUT_INTERVAL
   
   NAMELIST /NML_STATION_TIMESERIES/        &
@@ -45,6 +49,10 @@ MODULE MOD_STATION_TIMESERIES
        & OUT_ENERGY_SPECTRUM,              &
        & OUT_WAVE_PARTITION,               &
 # endif  
+# if defined (ICESHELF)
+       & OUT_ICESHELF_DRAFT,               &
+       & OUT_ICESHELF_MELTRATE,            &
+# endif 
        & OUT_INTERVAL
        
   INTEGER NSTA       
@@ -109,6 +117,11 @@ MODULE MOD_STATION_TIMESERIES
    integer,private :: imo_did   
 #  endif   
 
+#  if defined (ICESHELF)
+   integer,private :: isfdraft_s_vid
+   integer,private :: meltrate_s_vid
+#  endif 
+
    !--Info Variables
    character(len=120),public :: netcdf_timestring 
 
@@ -144,6 +157,10 @@ MODULE MOD_STATION_TIMESERIES
    OUT_ENERGY_SPECTRUM       = .False.
    OUT_WAVE_PARTITION        = .False. 
 #  endif  
+#  if defined (ICESHELF)
+   OUT_ICESHELF_DRAFT        = .False.
+   OUT_ICESHELF_MELTRATE     = .False.
+# endif 
    OUT_INTERVAL              = "A length of time: 'seconds= ','days= ', or 'cycles= '"
    
    
@@ -522,6 +539,24 @@ MODULE MOD_STATION_TIMESERIES
      END IF
 
 #    endif
+#    if defined (ICESHELF)
+     IF(OUT_ICESHELF_DRAFT)THEN 
+       allocate(ftemp(m))
+       ftemp = zisf(1:m)
+       i1 = lbound(ftemp,1) ; i2 = ubound(ftemp,1)
+       call putvar(i1,i2,m,mgl,1,1,"n",ftemp,nc_ofid,isfdraft_s_vid,myid&
+            &,nprocs,ipt, stck_cnt)
+       deallocate(ftemp)
+     END IF 
+     IF(OUT_ICESHELF_MELTRATE)THEN 
+       allocate(ftemp(m))
+       ftemp = M_w(1:m)
+       i1 = lbound(ftemp,1) ; i2 = ubound(ftemp,1)
+       call putvar(i1,i2,m,mgl,1,1,"n",ftemp,nc_ofid,meltrate_s_vid,myid&
+            &,nprocs,ipt, stck_cnt)
+       deallocate(ftemp)
+     END IF 	 
+#    endif
 
   IERR = NF90_CLOSE(NC_OFID)
 
@@ -885,6 +920,23 @@ NETCDF_TIMESTRING = 'seconds after 00:00:00'
     end if
 
 #   endif
+
+#   if defined (ICESHELF) 
+    if(OUT_ICESHELF_DRAFT)then
+     ierr = nf90_def_var(nc_ofid,"iceshelf_draft",nf90_float,dynm2ds,isfdraft_s_vid)
+     ierr = nf90_put_att(nc_ofid,isfdraft_s_vid,"long_name","Ice shelf draft")
+     ierr = nf90_put_att(nc_ofid,isfdraft_s_vid,"units","(m))")
+     ierr = nf90_put_att(nc_ofid,isfdraft_s_vid,"standard_name","Ice shelf draft")
+     ierr = nf90_put_att(nc_ofid,isfdraft_s_vid,"type","data")
+    end if
+	if(OUT_ICESHELF_MELTRATE)then
+     ierr = nf90_def_var(nc_ofid,"iceshelf_meltrate",nf90_float,dynm2ds,meltrate_s_vid)
+     ierr = nf90_put_att(nc_ofid,meltrate_s_vid,"long_name","Basal melt rate")
+     ierr = nf90_put_att(nc_ofid,meltrate_s_vid,"units","(m/s))")
+     ierr = nf90_put_att(nc_ofid,meltrate_s_vid,"standard_name","Basal melt rate")
+     ierr = nf90_put_att(nc_ofid,meltrate_s_vid,"type","data")
+    end if
+#   endif    
 !--Exit Define Mode
     ierr = nf90_enddef(nc_ofid)
     ierr = nf90_close(nc_ofid)

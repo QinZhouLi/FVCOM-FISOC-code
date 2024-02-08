@@ -48,13 +48,13 @@
 #========== TOPDIR ========================================================
 # TOPDIR is the directory in which this make file and the fvcom source reside
 
-           TOPDIR        ?= /projappl/project_2000339/source/esmf-fvcom-fisoc/FVCOM_source
+           TOPDIR        ?= /projappl/project_2002875/source/fvcom4_fisoc/FVCOM_source
 
 #========== INSTALLDIR =====================================================
 # INSTALLDIR is the directory where you wish to install external libraries
 # The default is in the $(TOPDIR)/libs/install, but you can choose...
 
-           INSTALLDIR    ?= /projappl/project_2000339/installs/FVCOM_external
+           INSTALLDIR    ?= /projappl/project_2002875/installs/FVCOM_external
 
 #===========================================================================
 # PREPROCESSOR OPTIONS FOR CPP
@@ -96,8 +96,11 @@ dashL= $(empty) -L
 #                           SET PATH TO INCLUDE FILES (netcdf.mod) WITH IOINCS
 #--------------------------------------------------------------------------
 
-              IOLIBS       ?= -L/appl/spack/install-tree/intel-19.0.4/netcdf-fortran-4.4.4-nbpz5p/lib -lnetcdff -lnetcdf
-              IOINCS       ?= -I/appl/spack/install-tree/intel-19.0.4/netcdf-fortran-4.4.4-nbpz5p/include
+#              IOLIBS       ?= -L/appl/spack/install-tree/intel-19.0.4/netcdf-fortran-4.4.4-nbpz5p/lib -lnetcdff -lnetcdf
+#              IOINCS       ?= -I/appl/spack/install-tree/intel-19.0.4/netcdf-fortran-4.4.4-nbpz5p/include
+
+              IOLIBS       ?= -L/appl/spack/v014/install-tree/gcc-9.3.0/netcdf-fortran-4.5.2-n7l5qr/lib -lnetcdff -lnetcdf
+              IOINCS       ?= -I/appl/spack/v014/install-tree/gcc-9.3.0/netcdf-fortran-4.5.2-n7l5qr/include"
 
 #--------------------------------------------------------------------------
 
@@ -129,7 +132,7 @@ dashL= $(empty) -L
 #                           UNCOMMENT TO SELECT SPHERICAL COORDINATES
 #--------------------------------------------------------------------------
 
-#            FLAG_2 ?= -DSPHERICAL
+            FLAG_2 ?= -DSPHERICAL
 
 #--------------------------------------------------------------------------
 #        FLOODYING/DRYING   INCLUDE WET/DRY TREATMENT OF DOMAIN
@@ -471,7 +474,7 @@ dashL= $(empty) -L
 #            TVD
 #--------------------------------------------------------------------------
 #
-#            FLAG_61 ?= -DTVD
+            FLAG_61 ?= -DTVD
 
 #-------------------------------------------------------------------------
 #        DEVELOPMENT FLAGS
@@ -499,8 +502,11 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #         CPP      ?= /usr/bin/cpp
 #         COMPILER ?= -DIFORT
+         COMPILER ?= -DGFORTRAN
 #         FC       ?= ifort
-         FC       = mpiifort
+         FC       = mpif90
+#         FC       = gfortran
+#         FC       = mpiifort
 #         CC       ?= icc
 #         CXX      ?= icc
 #         CFLAGS   ?= -O3
@@ -517,8 +523,9 @@ dashL= $(empty) -L
 #--------------------------------------------------------------------------
 #  Intel/MPI Compiler Definitions (SMAST)      
 #--------------------------------------------------------------------------
-         CPP      = /usr/bin/cpp
-         COMPILER = -DMPIIFORT  
+#         CPP      = /usr/bin/cpp
+         CPP      = cpp
+#         COMPILER = -DMPIIFORT  
 #         CC       ?= mpicc
 #         CXX      ?= mpicxx
          CFLAGS   = -O3 -fPIC 
@@ -538,7 +545,9 @@ dashL= $(empty) -L
 #  END USER DEFINITION SECTION
 #==========================================================================
          CPPFLAGS ?= $(DEF_FLAGS) $(COMPILER) -fPIC
-         FFLAGS ?= $(DEBFLGS) $(OPT) -fPIC
+         FFLAGS ?= $(DEBFLGS) $(OPT) -fPIC -ffree-line-length-512
+#         FFLAGS ?= $(DEBFLGS) -g -fPIC -std=legacy -ffree-line-length-512
+#         FFLAGS ?= $(DEBFLGS) -g -fPIC -ffree-line-length-512
          MDEPFLAGS ?= --cpp --fext=f90 --file=-
          RANLIB ?= ranlib
          AR = ar rc
@@ -556,9 +565,10 @@ dashL= $(empty) -L
    $(FLAG_31) $(FLAG_32) $(FLAG_33) $(FLAG_34) \
    $(FLAG_35) $(FLAG_36) $(FLAG_37) $(FLAG_38) \
    $(FLAG_39) $(FLAG_40) $(FLAG_41) $(FLAG_42) \
-   $(FLAG_43) $(FLAG_LAM)\
+   $(FLAG_43) $(FLAG_61) $(FLAG_LAM)\
    $(FLAG_101) $(FLAG_102) $(FLAG_103) $(FLAG_104) $(FLAG_105)\
    $(FLAG_211) $(FLAG_212) $(FLAG_213) $(FLAG_251) $(FLAG_261)\
+   -DFAKEICEDRAFT \
    $(CPP_MISC)
 
 #--------------------------------------------------------------------------
