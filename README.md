@@ -1,12 +1,23 @@
 
-# FVCOM4_FISOC
+Compiling FVCOM for FISOC on CSC machines.
 
-Merge the two repos fvcom4 and esmf-fisoc-fvcom
+Has been built on Puhti (approx. 2019), Mahti (approx. 2022) and LUMI (in progress as of Feb 2024).
 
-=======
-# ESMF-FVCOM-FISOC
+Scripts like this just load the right modules and call the python build script:
+buildFVCOM_MachineName.sh
 
-Developing source code on coupling FVCOM with the ice sheet model Elmer/ICE through a recently developed Framework for Ice Shelf Ocean Coupling , build on Earth System Modeling Framework. 
+I think the ones with "MM" and "FX4" instead of MachineName were used on Puhti and only differ from each other in terms of which make.inc to use and where to install.  This is because FVCOM was installed multiple times on Puhti with slightly different options. Only one build was used on Mahti.  Probably one build is fine for LUMI...
+
+
+Python scripts look like this:
+buildFVCOM_MachineName.py
+These scripts set some paths and environment variables and call make.
+
+
+
+
+
+Old notes:
 
 To build on virtual machine / elemeruser prepare code by:
 - copying FVCOM_source/make.inc.elmeruser to FVCOM_source/make.inc
@@ -14,8 +25,3 @@ To build on virtual machine / elemeruser prepare code by:
 - and execute it to build local libraries
 
 Then build FVCOM via cmake following the instructions given in the readme.elmeruser of the uk-fvcom-iceshelf-vm-elmeruser branch of the fvcom-cmake repository
-
-
-# FVCOM4 
-
-It is a 'fork' of ESMF-FVCOM_FISOC repo, manually copied outsied of git  
