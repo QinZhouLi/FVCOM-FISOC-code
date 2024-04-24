@@ -1333,9 +1333,12 @@ MODULE ALL_VARS
 # if defined (ICESHELF)
    REAL(SP), ALLOCATABLE,TARGET :: ZISF(:)          !!ICESHELF DRAFT
    REAL(SP), ALLOCATABLE,TARGET :: M_w(:)           !! MELT RATE
-#  if defined (FVCOM_API)
-   REAL(SP), ALLOCATABLE,TARGET :: Melt_Avg(:)      !! AVERAGED MELT RATE
-#  endif
+# if defined (FVCOM_API)
+   REAL(SP), ALLOCATABLE,TARGET :: Melt_Avg(:)      !! AVERAGED MELT RATE 
+# endif
+# if defined (FISOC_RUNOFF)
+   REAL(SP), ALLOCATABLE,TARGET :: subRunoff(:)      !! AVERAGED MELT RATE  
+# endif
 # if defined (FISOC_DRAFT)
    REAL(SP), ALLOCATABLE,TARGET :: ISF_DDDT(:)      !! RATE OF CHANGE OF DRAFT FROM FISOC
    REAL(SP), ALLOCATABLE,TARGET :: ISF_DSDT(:)      !! RATE OF CHANGE OF UPPER SURFACE FROM FISOC
@@ -1943,6 +1946,9 @@ CONTAINS
   ALLOCATE(M_w(0:MT))            ;M_w    = ZERO       !! MELT RATE
 # if defined (FVCOM_API)
   ALLOCATE(Melt_Avg(0:MT))       ;Melt_Avg   = ZERO    !! AVERAGED MELTRATE
+# endif
+# if defined (FISOC_RUNOFF)
+  ALLOCATE(subRunoff(0:MT))      ;subRunoff  = ZERO    !! SUBGLACIAL RUNOFF
 # endif 
 # if defined (FISOC_DRAFT)
   ALLOCATE(ISF_DDDT(0:MT))       ; ISF_DDDT   = ZERO    !! ICESHELF DRAFT CHANGE from FISOC
