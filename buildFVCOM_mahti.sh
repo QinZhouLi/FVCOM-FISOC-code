@@ -17,7 +17,8 @@ module load netcdf-fortran/4.5.3
 
 module load esmf/release
 module load elmer/FISOC
-module load fvcom/fimbul
+#module load fvcom/fimbul
+module load fvcom/MM_test
 module list
 
 python3 buildFVCOM_mahti.py

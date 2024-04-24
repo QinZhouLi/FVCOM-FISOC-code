@@ -3,8 +3,8 @@ import os
 from shutil import copyfile
 import subprocess
 
-#clean = True
-clean = False
+clean = True
+#clean = False
 
 #BuildPreReq = True
 BuildPreReq = False
@@ -12,10 +12,12 @@ BuildPreReq = False
 BuildFVCOM = True
 #BuildFVCOM = False
 
-install_dir =  "/projappl/project_2002875/installs/FVCOM_Fimbul/"
-make_inc_name = "make.inc.mahti"
-#install_dir =  "/projappl/project_2002875/installs/FVCOM_MM/"
-#make_inc_name = "make.inc.mahti.MM"
+#install_dir =  "/projappl/project_2002875/installs/FVCOM_Fimbul/"
+install_dir =  "/projappl/project_2002875/installs/FVCOM_MM/"
+#install_dir =  "/projappl/project_2002875/installs/FVCOM_MM_test/"
+
+#make_inc_name = "make.inc.mahti"
+make_inc_name = "make.inc.mahti.MM"
 
 #make_inc_name = "make.inc.puhti"
 
