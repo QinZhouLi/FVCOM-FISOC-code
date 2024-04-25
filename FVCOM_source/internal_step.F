@@ -443,8 +443,10 @@ SUBROUTINE INTERNAL_STEP
 # else          
          ZISF=ZISF-M_W*DTI
 # endif        !  FISOC_DRAFT
-         CALL   ISF_JUDGE 
+         CALL   ISF_JUDGE
+# if !defined (FISOC_RUNOFF) 
          IF(WETTING_DRYING_ON) CALL WET_JUDGE
+# endif
          D   =  H + EL-ZISF
          DT  =  H + ET-ZISF
          WHERE (D<=MIN_DEPTH)  D  =  MIN_DEPTH
