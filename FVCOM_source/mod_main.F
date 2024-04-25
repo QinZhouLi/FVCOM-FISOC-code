@@ -1337,7 +1337,8 @@ MODULE ALL_VARS
    REAL(SP), ALLOCATABLE,TARGET :: Melt_Avg(:)      !! AVERAGED MELT RATE 
 # endif
 # if defined (FISOC_RUNOFF)
-   REAL(SP), ALLOCATABLE,TARGET :: subRunoff(:)      !! AVERAGED MELT RATE  
+   REAL(SP), ALLOCATABLE,TARGET :: subRunoff(:)      !! subglacial runoff volumn flux   
+   REAL(SP), ALLOCATABLE,TARGET :: SsubRunoff(:)      !! salinity of the subglacial runoff, temperature set to freezing point  
 # endif
 # if defined (FISOC_DRAFT)
    REAL(SP), ALLOCATABLE,TARGET :: ISF_DDDT(:)      !! RATE OF CHANGE OF DRAFT FROM FISOC
@@ -1949,6 +1950,7 @@ CONTAINS
 # endif
 # if defined (FISOC_RUNOFF)
   ALLOCATE(subRunoff(0:MT))      ;subRunoff  = ZERO    !! SUBGLACIAL RUNOFF
+  ALLOCATE(SsubRunoff(0:MT))      ;SsubRunoff  = ZERO    !! SUBGLACIAL RUNOFF
 # endif 
 # if defined (FISOC_DRAFT)
   ALLOCATE(ISF_DDDT(0:MT))       ; ISF_DDDT   = ZERO    !! ICESHELF DRAFT CHANGE from FISOC

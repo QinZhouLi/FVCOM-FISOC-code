@@ -222,7 +222,18 @@
        END DO
      END IF
    END IF
+   
+!---------------SUBGLACIAL RUNOFF ----------------------
+!Added by Qin 24/04/2024
+# if defined(FISOC_RUNOFF)
+     DO I=1,M
+       DO K=1,KBM1
+           XFLUX(I,K)=XFLUX(I,K)-subRunoff(I)/KBM1
+       END DO
+     END DO
+# endif
 
+   
 #  if defined (MEAN_FLOW)
    IF (nmfcell > 0) THEN
      DO I = 1, nmfcell

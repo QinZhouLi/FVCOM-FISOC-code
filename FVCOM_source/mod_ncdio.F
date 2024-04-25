@@ -5317,7 +5317,33 @@ CONTAINS
     VAR  => ADD(VAR,ATT)
 
     NCF  => ADD(NCF,VAR)
+ 
+ ! FISOC RUNOFF
+# if defined(FISOC_RUNOFF)
+    VAR  => NC_MAKE_AVAR(name='subRunoff',&
+         & VALUES=subRunoff, DIM1= DIM_node, DIM2= DIM_time)
 
+    ATT  => NC_MAKE_ATT(name='long_name',values='Subglacial runoff from FISOC ')
+    VAR  => ADD(VAR,ATT)
+
+    ATT  => NC_MAKE_ATT(name='description',values='Volume flux, ocean &
+         &lose water is negative')
+    VAR  => ADD(VAR,ATT)
+
+    ATT  => NC_MAKE_ATT(name='units',values='m^3 s-1')
+    VAR  => ADD(VAR,ATT)
+
+    ATT  => NC_MAKE_ATT(name='grid',values='fvcom_grid')
+    VAR  => ADD(VAR,ATT)
+
+    ATT  => NC_MAKE_ATT(name='coordinates',values=CoordVar)
+    VAR  => ADD(VAR,ATT)
+
+    ATT  => NC_MAKE_ATT(name='type',values='data')
+    VAR  => ADD(VAR,ATT)
+
+    NCF  => ADD(NCF,VAR)
+# endif
 
  ! ISF_DDDT & ISF_DSDT
 # if defined(FISOC_DRAFT)
