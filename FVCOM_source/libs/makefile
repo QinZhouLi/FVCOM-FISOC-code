@@ -10,15 +10,15 @@ PACKAGES =	proj	fproj	julian	metis
 
 
 all:
-	#for item in $(PACKAGES); do (./untar.sh $$item ) || exit 1; done
-	#cd proj && ./configure CC="$(CC)" CFLAGS=-O3 CXX="$(CC)" CXXFLAGS=-O3 F77="$(FC)" FFLAGS=-O3 --prefix="$(MYINSTALLDIR)" --disable-shared
-	#cd proj && make -j 4 install
+	for item in $(PACKAGES); do (./untar.sh $$item ) || exit 1; done
+	cd proj && ./configure CC="$(CC)" CFLAGS=-O3 CXX="$(CC)" CXXFLAGS=-O3 F77="$(FC)" FFLAGS=-O3 --prefix="$(MYINSTALLDIR)" --disable-shared
+	cd proj && make -j 4 install
 	cd fproj && ./configure CPPFLAGS='$(COMPILER)' CC="$(CC)" CFLAGS=-O3 CXX="$(CXX)" CXXFLAGS=-O3 FC="$(FC)" FFLAGS=-O3 --with-proj4="$(MYINSTALLDIR)" --prefix="$(MYINSTALLDIR)"
 	cd fproj && make CFLAGS=-DGFORTRAN install
 	# Patch metis.
 	#cd metis && patch -p2 < ../metis-4.0.patch
-	#cd metis && make install
-	#cd julian && make -j 4 install
+	cd metis && make install
+	cd julian && make -j 4 install
 
 
 

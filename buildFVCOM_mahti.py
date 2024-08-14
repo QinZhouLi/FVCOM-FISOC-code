@@ -12,12 +12,13 @@ BuildPreReq = False
 BuildFVCOM = True
 #BuildFVCOM = False
 
+install_dir =  "/projappl/project_2002875/installs/FVCOM_Qin/"
 #install_dir =  "/projappl/project_2002875/installs/FVCOM_Fimbul/"
-install_dir =  "/projappl/project_2002875/installs/FVCOM_MM/"
+#install_dir =  "/projappl/project_2002875/installs/FVCOM_MM/"
 #install_dir =  "/projappl/project_2002875/installs/FVCOM_MM_test/"
 
-#make_inc_name = "make.inc.mahti"
-make_inc_name = "make.inc.mahti.MM"
+make_inc_name = "make.inc.mahti"
+#make_inc_name = "make.inc.mahti.MM"
 
 #make_inc_name = "make.inc.puhti"
 
@@ -90,18 +91,18 @@ if BuildFVCOM:
         ret = subprocess.call(["make", "clean"])
         if (ret != 0):
             raise NameError("ERROR: Failed to clean FVCOM\n")
-    else:
-        ret = subprocess.call(["make"])
-        if (ret != 0):
-            raise NameError("ERROR: Failed to build FVCOM\n")
 
-        print ("copy to ",install_dir)
+    ret = subprocess.call(["make"])
+    if (ret != 0):
+        raise NameError("ERROR: Failed to build FVCOM\n")
 
-        try:
-            copyfile("fvcom_driver", install_dir+"/fvcom_driver")
-            copyfile("libfvcom_api.so", install_dir+"/libfvcom_api.so")
-        except:
-            raise NameError("ERROR: Failed to copy lib and exe to install_dir\n")
+    print ("copy to ",install_dir)
+
+    try:
+        copyfile("fvcom_driver", install_dir+"/fvcom_driver")
+        copyfile("libfvcom_api.so", install_dir+"/libfvcom_api.so")
+    except:
+        raise NameError("ERROR: Failed to copy lib and exe to install_dir\n")
 
 print("\nFVCOM build complete (maybe it even works...) \n")
 

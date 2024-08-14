@@ -48,13 +48,13 @@
 #========== TOPDIR ========================================================
 # TOPDIR is the directory in which this make file and the fvcom source reside
 
-           TOPDIR        ?= /project/project_462000287/source/fvcom4_fisoc/FVCOM_source
+           TOPDIR        ?= /projappl/project_2002875/source/fvcom4_fisoc/FVCOM_source
 
 #========== INSTALLDIR =====================================================
 # INSTALLDIR is the directory where you wish to install external libraries
 # The default is in the $(TOPDIR)/libs/install, but you can choose...
 
-           INSTALLDIR    ?= /project/project_462000287/installations/FVCOM_external
+           INSTALLDIR    ?= /projappl/project_2002875/installs/FVCOM_external
 
 #===========================================================================
 # PREPROCESSOR OPTIONS FOR CPP
@@ -99,8 +99,8 @@ dashL= $(empty) -L
 #              IOLIBS       ?= -L/appl/spack/install-tree/intel-19.0.4/netcdf-fortran-4.4.4-nbpz5p/lib -lnetcdff -lnetcdf
 #              IOINCS       ?= -I/appl/spack/install-tree/intel-19.0.4/netcdf-fortran-4.4.4-nbpz5p/include
 
-#              IOLIBS       ?= -L/appl/spack/v014/install-tree/gcc-9.3.0/netcdf-fortran-4.5.2-n7l5qr/lib -lnetcdff -lnetcdf
-#              IOINCS       ?= -I/appl/spack/v014/install-tree/gcc-9.3.0/netcdf-fortran-4.5.2-n7l5qr/include"
+              IOLIBS       ?= -L/appl/spack/v014/install-tree/gcc-9.3.0/netcdf-fortran-4.5.2-n7l5qr/lib -lnetcdff -lnetcdf
+              IOINCS       ?= -I/appl/spack/v014/install-tree/gcc-9.3.0/netcdf-fortran-4.5.2-n7l5qr/include"
 
 #--------------------------------------------------------------------------
 
@@ -545,7 +545,7 @@ dashL= $(empty) -L
 #  END USER DEFINITION SECTION
 #==========================================================================
          CPPFLAGS ?= $(DEF_FLAGS) $(COMPILER) -fPIC
-         FFLAGS ?= $(DEBFLGS) $(OPT) -fPIC -ffree-line-length-512 -fallow-argument-mismatch
+         FFLAGS ?= $(DEBFLGS) $(OPT) -fPIC -ffree-line-length-512
 #         FFLAGS ?= $(DEBFLGS) -g -fPIC -std=legacy -ffree-line-length-512
 #         FFLAGS ?= $(DEBFLGS) -g -fPIC -ffree-line-length-512
          MDEPFLAGS ?= --cpp --fext=f90 --file=-
